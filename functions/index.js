@@ -11,10 +11,11 @@ const functions = require('firebase-functions');
 
 const app = dialogflow({ debug: true });
 
+const ynab = require('./ynab');
 
 // Handle the Dialogflow intent named 'favorite color'.
 // The intent collects a parameter named 'color'.
-app.intent('welcome', (conv) => {
+app.intent('welcome', async (conv) => {
   // Respond with the user's lucky number and end the conversation.
   const name = conv.user.storage.userName;
   if (!name) {
@@ -26,7 +27,10 @@ app.intent('welcome', (conv) => {
     }));
   } else {
     conv.ask(`Hi again, ${name}. Welcome to YNAB Assistant.`);
-    conv.close('I am still learning. Talk to you next time!');
+
+    const userResponse = await ynab.api.user.getUser();
+    conv.close(`Your YNAB User ID is ${userResponse.data.user.id}. ` +
+    `I am still learning. Talk to you next time!`);
   }
 });
 
@@ -43,7 +47,12 @@ app.intent('actions_intent_PERMISSION', (conv, params, permissionGranted) => {
     conv.user.storage.userName = conv.user.name.display;
     conv.ask(`Thanks, ${conv.user.storage.userName}. Welcome to YNAB Assistant`);
   }
-  conv.close('I am still learning. Talk to you next time!');
+
+  (async function () {
+    const userResponse = await ynab.api.user.getUser();
+    conv.ask(`Your YNAB User ID is ${userResponse.data.user.id}`);
+    conv.close('I am still learning. Talk to you next time!');
+  })();
 });
 
 
