@@ -6,9 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
 
-# secret
-functions/secret.js
-
 # Firebase cache
 .firebase/
 
