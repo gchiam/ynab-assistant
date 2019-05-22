@@ -1,9 +1,13 @@
 plugins {
-    java
+    application
 }
 
 group = "me.chiam.gordon"
 version = "0.1.0"
+
+application {
+    mainClassName = "me.chiam.gordon.ynabassistant.HelloWorldApplication"
+}
 
 repositories {
     mavenCentral()
