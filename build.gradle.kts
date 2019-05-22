@@ -9,9 +9,15 @@ repositories {
     mavenCentral()
 }
 
+object Versions {
+    const val dropwizardVersion = "1.3.11"
+    const val junitVersion = "5.4.2"
+}
+
 dependencies {
-    testImplementation("org.junit.jupiter", "junit-jupiter-api", "5.4.2")
-    testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.4.2")
+    compile("io.dropwizard", "dropwizard-core", Versions.dropwizardVersion)
+    testCompile("org.junit.jupiter", "junit-jupiter-api", Versions.junitVersion)
+    testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", Versions.junitVersion)
 }
 
 configure<JavaPluginConvention> {
