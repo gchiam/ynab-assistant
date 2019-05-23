@@ -3,4 +3,5 @@ RUN mkdir /opt/app
 COPY build/install/ynab-assistant /opt/app/ynab-assistant
 COPY config /opt/app/ynab-assistant/config
 WORKDIR /opt/app/ynab-assistant
+EXPOSE 8080
 CMD ["bin/ynab-assistant", "server", "config/default.yaml"]
