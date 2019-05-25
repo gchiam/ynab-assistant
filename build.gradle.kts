@@ -14,11 +14,13 @@ repositories {
 }
 
 object Versions {
+    const val actionsOnGoogleVersion = "1.1.0"
     const val dropwizardVersion = "1.3.11"
     const val junitVersion = "5.4.2"
 }
 
 dependencies {
+    compile("com.google.actions", "actions-on-google", Versions.actionsOnGoogleVersion)
     compile("io.dropwizard", "dropwizard-core", Versions.dropwizardVersion)
     testCompile("org.junit.jupiter", "junit-jupiter-api", Versions.junitVersion)
     testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", Versions.junitVersion)
